@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobTitleService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
+import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobTitleDao;
 import kodlamaio.hrms.entities.concretes.JobTitle;
 
@@ -21,9 +26,25 @@ public class JobTitleManager implements JobTitleService {
 	}
 
 	@Override
-	public List<JobTitle> getAll() {
-		
-		return this.jobTitleDao.findAll();
+	public DataResult<List<JobTitle>> getAll() {
+		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(),  "Unvanlar listelendi!..!..!..!");
 	}
+	
+	@Override
+	public DataResult<List<JobTitle>> findAllByTitle(String title) {
+		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAllByTitle(title));
+	}
+
+	@Override
+	public Result add(JobTitle jobTitle) {
+		if(this.jobTitleDao.findAllByTitle(jobTitle.getTitle()).stream().count() !=0) {
+			return new ErrorResult("Bu Unvan Daha Once Eklenmis");
+		}
+		
+		this.jobTitleDao.save(jobTitle);
+		return new SuccessResult("Unvan Basariyla Eklendi");
+	}
+
+	
 
 }
