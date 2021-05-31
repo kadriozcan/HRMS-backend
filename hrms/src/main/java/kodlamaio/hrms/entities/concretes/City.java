@@ -10,28 +10,28 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
-@Table(name="job_titles")
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-public class JobTitle {
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","jobPostings"})
+@Table(name = "cities")
+@NoArgsConstructor
+public class City {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
 	
-	@Column(name="title")
-	private String title;
+	@Column(name = "name")
+	private String name;
 	
-	@OneToMany(mappedBy = "jobTitle")
+	@OneToMany(mappedBy = "city")
 	private List<JobPosting> jobPostings;
-	
-
-	
 }
