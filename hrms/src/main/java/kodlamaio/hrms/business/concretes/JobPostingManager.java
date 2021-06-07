@@ -1,5 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobPostingDao;
 import kodlamaio.hrms.entities.concretes.JobPosting;
+import kodlamaio.hrms.entities.dtos.JobPostingDto;
 
 @Service
 public class JobPostingManager implements JobPostingService {
@@ -37,4 +40,37 @@ public class JobPostingManager implements JobPostingService {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<JobPosting>(this.jobPostingDao.findById(id));
 	}
+
+	@Override
+	public DataResult<List<JobPosting>> getAll() {
+		
+		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.findAll(), "Tum aktif is ilanlari listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobPostingDto>> findAllByStatusTrue() {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<JobPostingDto>>(this.jobPostingDao.findAllByStatusTrue(), "Aktif is ilanlari listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobPostingDto>> findAllByStatusTrueOrderByReleaseDateDesc() {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<JobPostingDto>>(this.jobPostingDao.findAllByStatusTrueOrderByReleaseDateDesc());
+	}
+
+	@Override
+	public DataResult<List<JobPostingDto>> findAllByStatusTrueOrderByReleaseDateAsc() {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<JobPostingDto>>(this.jobPostingDao.findAllByStatusTrueOrderByReleaseDateAsc());
+	}
+
+	@Override
+	public DataResult<List<JobPostingDto>> findAllByEmployer(int employerId) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<JobPostingDto>>(this.jobPostingDao.findAllByEmployer(employerId));
+	}
+
+
+
 }

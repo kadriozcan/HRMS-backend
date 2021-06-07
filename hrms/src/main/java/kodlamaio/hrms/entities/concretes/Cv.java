@@ -10,34 +10,41 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
-@Table(name="job_titles")
-@NoArgsConstructor
+@Data
+@Table(name = "cvs")
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobPostings"})
-public class JobTitle {
+@NoArgsConstructor
 
+public class Cv {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
 	
-	@Column(name="title")
-	private String title;
+	@Column(name = "candidate_id")
+	private int candidateId;
 	
-	@OneToMany(mappedBy = "jobTitle")
-	private List<JobPosting> jobPostings;
+	@Column(name = "image_link")
+	private String imageLink;
 	
-	@OneToMany(mappedBy = "jobTitle")
+	@Column(name = "cover_letter")
+	private String coverLetter;
+	
+	@OneToMany(mappedBy = "cv")
 	private List<CvJobExperience> cvJobExperiences;
 	
-
+	@OneToMany(mappedBy = "cv")
+	private List<CvForeignLanguages> cvForeignLanguages;
 	
+	@OneToMany(mappedBy = "cv")
+	private List<CvSocialMedia> cvSocialMedias;
+	
+	@OneToMany(mappedBy = "cv")
+	private List<CvSkills> cvSkills;
 }
