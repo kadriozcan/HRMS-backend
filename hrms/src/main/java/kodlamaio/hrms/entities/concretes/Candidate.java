@@ -1,9 +1,14 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import kodlamaio.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
@@ -21,6 +26,7 @@ import lombok.NoArgsConstructor;
 public class Candidate extends User{
 	
 	
+	
 	@Column(name = "first_name")
 	private String firstName;
 	
@@ -32,6 +38,23 @@ public class Candidate extends User{
 	
 	@Column(name = "birth_year")
 	private int birthYear;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "candidate")
+	private List<CvDetail> cvDetails;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "candidate")
+	private List<CvEducation> cvEducations;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "candidate")
+	private List<CvForeignLanguage> cvForeignLanguages;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "candidate")
+	private List<CvJobExperience> cvJobExperiences;
+	
 	
 	
 }

@@ -36,11 +36,11 @@ public class CvJobExperience {
 	@Column(name = "ending_date")
 	private LocalDate endingDate;
 	
-	@ManyToOne
-	@JoinColumn(name = "job_title_id")
-	private JobTitle jobTitle;
+	@Column(name = "job_title")
+	private String jobTitle;
 	
 	@ManyToOne
-	@JoinColumn(name = "cv_id")
-	private Cv cv;
+	@JoinColumn(name = "candidate_id")
+	private Candidate candidate;
+	
 }

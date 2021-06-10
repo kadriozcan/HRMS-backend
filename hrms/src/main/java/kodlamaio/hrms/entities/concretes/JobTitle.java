@@ -35,8 +35,6 @@ public class JobTitle {
 	@OneToMany(mappedBy = "jobTitle")
 	private List<JobPosting> jobPostings;
 	
-	@OneToMany(mappedBy = "jobTitle")
-	private List<CvJobExperience> cvJobExperiences;
 	
 
 	

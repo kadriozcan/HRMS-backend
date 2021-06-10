@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,10 +33,7 @@ public class Language {
 	@Column(name = "language_name")
 	private String languageName;
 	
-	@ManyToOne
-	@JoinColumn(name = "language_level_id")
-	private LanguageLevel languageLevel;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "language")
-	private List<CvForeignLanguages> cvForeignLanguages;
+	private List<CvForeignLanguage> cvForeignLanguages;
 }

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,15 +33,19 @@ public class CvEducation {
 	@Column(name = "school_graduation_year")
 	private int schoolGraduationYear;
 	
-	@ManyToOne
-	@JoinColumn(name = "school_id")
-	private School school;
+    @Column(name = "school_name")
+    @NotNull
+    @NotBlank
+    private String schoolName;
+    
+    @Column(name = "department_name")
+    @NotNull
+    @NotBlank
+    private String departmentName;
 	
-	@ManyToOne
-	@JoinColumn(name = "department_id")
-	private Department department;
+	@ManyToOne()
+	@JoinColumn(name = "candidate_id")
+	private Candidate candidate;
 	
-	@ManyToOne
-	@JoinColumn(name = "cv_id")
-	private Cv cv;
+	
 }
